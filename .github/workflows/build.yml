@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: 
+      image: kiloexabyte/runner-image
+    steps:
+      - name: Clone repo into subdirectory
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git clone --depth=1 --branch "${{ github.event.pull_request.head.ref }}" https://github.com/${{ github.repository }} repo
+            echo "Cloned PR branch: ${{ github.event.pull_request.head.ref }}"
+          else
+            git clone --depth=1 --branch "${{ github.ref_name }}" https://github.com/${{ github.repository }} repo
+            echo "Cloned branch: ${{ github.ref_name }}"
+          fi
+          cd repo
+          ls -lah
+
+      - name: Run Go script
+        run: |
+          cd repo
+          ls -lah
+          op build
