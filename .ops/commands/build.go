@@ -22,6 +22,11 @@ func (Ops) Build() {
 		log.Fatal(err)
 	}
 
+	err = rnr.Run("go", "test", "-shuffle=on", "./...")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	err = rnr.Run("echo", "goodbye from", rnr.Env("PKGNAME"))
 	if err != nil {
 		log.Fatal(err)
