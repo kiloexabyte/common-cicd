@@ -1,3 +1,7 @@
 package commands
 
-type Ops struct{}
+import commoncicd "github.com/kiloexabyte/common-cicd"
+
+type Ops struct{
+	commoncicd.Ops
+}
