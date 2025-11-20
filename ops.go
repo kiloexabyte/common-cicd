@@ -1,3 +1,7 @@
 package commoncicd
 
-type Ops struct{}
+import gofunctions "github.com/kiloexabyte/common-cicd/go-functions"
+
+type Ops struct{
+	gofunctions.Ops
+}
