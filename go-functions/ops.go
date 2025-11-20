@@ -1,3 +1,3 @@
 package gofunctions
 
-type GoOps struct{}
+type Ops struct{}

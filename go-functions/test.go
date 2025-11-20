@@ -6,7 +6,7 @@ import (
 	"lesiw.io/cmdio/sys"
 )
 
-func (GoOps) Test() {
+func (Ops) Test() {
 	var rnr = sys.Runner().WithEnv(map[string]string{
 		"PKGNAME": "cmdio",
 	})
