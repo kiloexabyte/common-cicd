@@ -35,3 +35,4 @@ jobs:
           cd repo
           ls -lah
           op build
+          op test

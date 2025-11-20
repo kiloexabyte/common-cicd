@@ -6,7 +6,7 @@ import (
 	"lesiw.io/cmdio/sys"
 )
 
-func (Ops) Build() {
+func (Ops) Test() {
 	var rnr = sys.Runner().WithEnv(map[string]string{
 		"PKGNAME": "cmdio",
 	})
@@ -17,7 +17,7 @@ func (Ops) Build() {
 		log.Fatal(err)
 	}
 
-	err = rnr.Run("go", "build", "-v", "./...")
+	err = rnr.Run("go", "test", "-shuffle=on", "./...")
 	if err != nil {
 		log.Fatal(err)
 	}
