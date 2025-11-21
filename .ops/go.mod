@@ -3,12 +3,12 @@ module ops
 go 1.24.3
 
 require (
-	github.com/kiloexabyte/common-cicd v0.0.0-20251120231701-a044ef560eaf
+	github.com/kiloexabyte/common-cicd v0.0.0-20251121001420-cc9596eed876
 	lesiw.io/ops v0.14.0
 )
 
 require (
-	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/sync v0.18.0 // indirect
 	lesiw.io/cmdio v0.10.0 // indirect
 	lesiw.io/defers v0.9.0 // indirect
 	lesiw.io/flag v0.7.0 // indirect

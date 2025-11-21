@@ -34,5 +34,6 @@ jobs:
         run: |
           cd repo
           ls -lah
+          op lint
           op build
           op test
