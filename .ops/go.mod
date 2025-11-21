@@ -3,7 +3,7 @@ module ops
 go 1.24.3
 
 require (
-	github.com/kiloexabyte/common-cicd v0.0.0-20251121001420-cc9596eed876
+	github.com/kiloexabyte/common-cicd v0.0.0-20251121020400-bb3ca854ab0d
 	lesiw.io/ops v0.14.0
 )
 
