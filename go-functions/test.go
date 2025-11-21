@@ -17,7 +17,7 @@ func (Ops) Test() {
 		log.Fatal(err)
 	}
 
-	err = rnr.Run("go", "test", "-shuffle=on", "./...")
+	err = rnr.Run("go", "test", "-race","-shuffle=on", "./...")
 	if err != nil {
 		log.Fatal(err)
 	}
