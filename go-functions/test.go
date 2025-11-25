@@ -9,6 +9,7 @@ import (
 func (Ops) Test() {
 	var rnr = sys.Runner().WithEnv(map[string]string{
 		"PKGNAME": "cmdio",
+		"CGO_ENABLED": "1", // needed for -race flag
 	})
 	defer rnr.Close()
 
@@ -17,7 +18,7 @@ func (Ops) Test() {
 		log.Fatal(err)
 	}
 
-	err = rnr.Run("go", "test","-shuffle=on", "./...")
+	err = rnr.Run("go", "test", "-race","-shuffle=on", "./...")
 	if err != nil {
 		log.Fatal(err)
 	}
