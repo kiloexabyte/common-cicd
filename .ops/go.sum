@@ -1,7 +1,7 @@
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
-github.com/kiloexabyte/common-cicd v0.0.0-20251121033256-94cdba5e9fb3 h1:NRuRhMsh9WDZkPYlSsOOyj11dVD7wwYGqNAvZ7vHbLk=
-github.com/kiloexabyte/common-cicd v0.0.0-20251121033256-94cdba5e9fb3/go.mod h1:5TclqaxZ5Db7KOPrKJmE23Ps1Fzb9yZ8SI6g9/MJnGM=
+github.com/kiloexabyte/common-cicd v0.0.0-20251125175521-b4a989153f24 h1:U+eLvXi+KustbIFBeYvQ6p/0KIbEwtN+7q4LZDq30LU=
+github.com/kiloexabyte/common-cicd v0.0.0-20251125175521-b4a989153f24/go.mod h1:5TclqaxZ5Db7KOPrKJmE23Ps1Fzb9yZ8SI6g9/MJnGM=
 golang.org/x/sync v0.18.0 h1:kr88TuHDroi+UVf+0hZnirlk8o8T+4MrK6mr60WkH/I=
 golang.org/x/sync v0.18.0/go.mod h1:9KTHXmSnoGruLpwFjVSX0lNNA75CykiMECbovNTZqGI=
 golang.org/x/sys v0.28.0 h1:Fksou7UEQUWlKvIdsqzJmUmCX3cZuD2+P3XyyzwMhlA=
