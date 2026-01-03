@@ -2,9 +2,7 @@ package gofunctions
 
 import (
 	"log"
-
 	"context"
-
 	"lesiw.io/command"
 	"lesiw.io/command/sys"
 )
