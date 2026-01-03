@@ -1,22 +1,17 @@
 package gofunctions
 
 import (
-	"log"
-
 	"context"
-
+	"log"
 	"lesiw.io/command"
 	"lesiw.io/command/sys"
 )
 
-func (Ops) Test() {
+func (Ops) Version() {
 	ctx := context.Background()
 	sh := command.Shell(sys.Machine(), "go")
 
-    if err := sh.Exec(ctx, "go", 
-		"test", 
-		"-race","-shuffle=on", 
-	"./..."); err != nil {
+    if err := sh.Exec(ctx, "go", "version"); err != nil {
         log.Fatal(err)
     }
 }
