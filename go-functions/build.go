@@ -7,7 +7,6 @@ import (
 	"lesiw.io/command/sys"
 )
 
-
 func (Ops) Build() {
 	ctx := context.Background()
 	sh := command.Shell(sys.Machine(), "go")
