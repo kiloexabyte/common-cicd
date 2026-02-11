@@ -2,16 +2,13 @@ package gofunctions
 
 import (
 	"context"
-	"log"
+
 	"lesiw.io/command"
 	"lesiw.io/command/sys"
 )
 
-func (Ops) Lint() {
+func (Ops) Lint() error {
 	ctx := context.Background()
-	sh := command.Shell(sys.Machine(), "golangci-lint")
-
-    if err := sh.Exec(ctx, "golangci-lint", "run"); err != nil {
-        log.Fatal(err)
-    }
+	sh := command.Shell(sys.Machine(), "golangci-lint", "go")
+	return sh.Exec(ctx, "golangci-lint", "run")
 }
