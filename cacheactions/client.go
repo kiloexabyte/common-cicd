@@ -24,7 +24,7 @@ func newClient() (*client, error) {
 	baseURL := os.Getenv("ACTIONS_CACHE_URL")
 	token := os.Getenv("ACTIONS_RUNTIME_TOKEN")
 	if baseURL == "" || token == "" {
-		return nil, fmt.Errorf("ACTIONS_CACHE_URL and ACTIONS_RUNTIME_TOKEN must be set")
+		return nil, fmt.Errorf("missing ACTIONS_CACHE_URL or TOKEN")
 	}
 	return &client{
 		baseURL: strings.TrimSuffix(baseURL, "/"),
@@ -41,7 +41,9 @@ func (c *client) version(paths []string) string {
 	return fmt.Sprintf("%x", h.Sum(nil))
 }
 
-func (c *client) request(method, url string, body io.Reader) (*http.Request, error) {
+func (c *client) request(
+	method, url string, body io.Reader,
+) (*http.Request, error) {
 	req, err := http.NewRequest(method, url, body)
 	if err != nil {
 		return nil, err
@@ -56,7 +58,10 @@ func (c *client) request(method, url string, body io.Reader) (*http.Request, err
 
 func (c *client) exists(key string, paths []string) (bool, error) {
 	version := c.version(paths)
-	url := fmt.Sprintf("%s_apis/artifactcache/cache?keys=%s&version=%s", c.baseURL, key, version)
+	url := fmt.Sprintf(
+		"%s_apis/artifactcache/cache?keys=%s&version=%s",
+		c.baseURL, key, version,
+	)
 	req, err := c.request("GET", url, nil)
 	if err != nil {
 		return false, err
@@ -71,7 +76,10 @@ func (c *client) exists(key string, paths []string) (bool, error) {
 
 func (c *client) restore(key string, paths []string) error {
 	version := c.version(paths)
-	url := fmt.Sprintf("%s_apis/artifactcache/cache?keys=%s&version=%s", c.baseURL, key, version)
+	url := fmt.Sprintf(
+		"%s_apis/artifactcache/cache?keys=%s&version=%s",
+		c.baseURL, key, version,
+	)
 	req, err := c.request("GET", url, nil)
 	if err != nil {
 		return err
@@ -119,14 +127,17 @@ func (c *client) downloadAndExtract(url string) error {
 		target := header.Name
 		switch header.Typeflag {
 		case tar.TypeDir:
-			if err := os.MkdirAll(target, os.FileMode(header.Mode)); err != nil {
+			mode := os.FileMode(header.Mode)
+			if err := os.MkdirAll(target, mode); err != nil {
 				return err
 			}
 		case tar.TypeReg:
 			if err := os.MkdirAll(filepath.Dir(target), 0755); err != nil {
 				return err
 			}
-			f, err := os.OpenFile(target, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, os.FileMode(header.Mode))
+			mode := os.FileMode(header.Mode)
+			flags := os.O_CREATE | os.O_WRONLY | os.O_TRUNC
+			f, err := os.OpenFile(target, flags, mode)
 			if err != nil {
 				return err
 			}
@@ -187,7 +198,7 @@ func (c *client) createArchive(paths []string) ([]byte, error) {
 	tw := tar.NewWriter(gw)
 	for _, p := range paths {
 		p = expandPath(p)
-		err := filepath.Walk(p, func(file string, fi os.FileInfo, err error) error {
+		walkFn := func(file string, fi os.FileInfo, err error) error {
 			if err != nil {
 				return err
 			}
@@ -209,8 +220,8 @@ func (c *client) createArchive(paths []string) ([]byte, error) {
 			defer f.Close()
 			_, err = io.Copy(tw, f)
 			return err
-		})
-		if err != nil {
+		}
+		if err := filepath.Walk(p, walkFn); err != nil {
 			return nil, err
 		}
 	}

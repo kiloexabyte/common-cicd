@@ -1,10 +1,12 @@
 package main
 
 import (
-	"lesiw.io/ops"
 	commands "ops/commands"
+
+	"lesiw.io/ops"
 )
 
+// run touch ./.ops/mod.go && op -l to recompile
 func main() {
 	ops.Handle(commands.Ops{})
 }
