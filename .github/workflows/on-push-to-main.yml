@@ -1,0 +1,21 @@
+name: On push to main
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: 
+      image: kiloexabyte/runner-image
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run Go script
+        run: |
+          op lint
+          op build
+          op test
